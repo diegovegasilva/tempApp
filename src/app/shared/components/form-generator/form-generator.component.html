@@ -2,18 +2,29 @@
       class="form">
     <div class="form-group"
          *ngFor="let field of fields">
-        <mat-form-field>
+        <mat-form-field *ngIf="field.inputType === 'text'">
             <input matInput
-                   [type]="field.type || 'text'"
+                   [type]="field.type"
                    [disabled]="field.disabled"
                    [readonly]="field.readonly"
                    [placeholder]="field.placeholder"
                    formControlName="{{field.key}}">
-             <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
-             <mat-error *ngIf="form.controls[field.key].hasError('email')">{{errorMsg.INVALID_EMAIL}}</mat-error>
-             <mat-error *ngIf="form.controls[field.key].hasError('minLength')">{{errorMsg.INVALID_MINLENGTH}}</mat-error>
-             <mat-error *ngIf="form.controls[field.key].hasError('maxLength')">{{errorMsg.INVALID_MAXLENGTH}}</mat-error>
-             <mat-error *ngIf="form.controls[field.key].hasError('pattern')">{{errorMsg.INVALID_PATTERN}}</mat-error>
+            <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+            <mat-error *ngIf="form.controls[field.key].hasError('email') && !form.controls[field.key].hasError('required')">{{errorMsg.INVALID_EMAIL}}</mat-error>
+            <mat-error *ngIf="form.controls[field.key].hasError('minLength') && !form.controls[field.key].hasError('required')">{{errorMsg.INVALID_MINLENGTH}}</mat-error>
+            <mat-error *ngIf="form.controls[field.key].hasError('maxLength') && !form.controls[field.key].hasError('required')">{{errorMsg.INVALID_MAXLENGTH}}</mat-error>
+            <mat-error *ngIf="form.controls[field.key].hasError('pattern') && !form.controls[field.key].hasError('required')">{{errorMsg.INVALID_PATTERN}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="field.inputType === 'select'">
+            <mat-select [placeholder]="field.placeholder"
+                        formControlName="{{field.key}}">
+                <mat-option *ngFor="let value of field.value | async"
+                            [value]="value.id">
+                    {{value.province}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
         </mat-form-field>
     </div>
 </form>

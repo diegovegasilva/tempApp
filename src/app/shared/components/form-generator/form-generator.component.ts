@@ -12,7 +12,7 @@ import { FormGeneratorData, FormGeneratorField } from '../../models/formGenerato
 export class FormGeneratorComponent implements OnInit {
   @Input() settings: FormGeneratorData;
   form: FormGroup;
-  fields: FormGeneratorField[];
+  fields: FormGeneratorField<any>[];
   errorMsg;
 
   constructor(private fb: FormBuilder) {
@@ -34,17 +34,19 @@ export class FormGeneratorComponent implements OnInit {
   createFormObject() {
     const formObject = {};
     _.each(this.fields, field => {
-      formObject[field.key] = new FormControl(field.value || '', this.addValidators(field.validations));
+      console.log('each', field);
+      formObject[field.key] = new FormControl(field.value || '', this.addValidators(field.validators));
     });
 
     return formObject;
   }
+
   addValidators(validationData: any[]): any[] {
-    const validations = [];
+    const validatiors = [];
     _.each(validationData, val => {
-      validations.push(Validators[val.type]);
+      validatiors.push(Validators[val.type]);
     });
-    return validations;
+    return validatiors;
   }
 
   test() {

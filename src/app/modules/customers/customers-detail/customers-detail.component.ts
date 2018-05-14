@@ -22,7 +22,7 @@ import { Province } from '../../../shared/models/province.model';
 
 
 
-import { FormGeneratorData } from '../../../shared/models/formGenerator.model';
+import { FormGeneratorData, FormGeneratorInput } from '../../../shared/models/formGenerator.model';
 
 @Component({
   selector: 'app-customers-detail',
@@ -124,16 +124,41 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   setupForm() {
     this.formSettings = {
       fields: [
-        {
-          key: 'name',
-          type: 'text',
-          placeholder: 'name',
-          value: 'pepe2',
-          validations: [
-            {type: 'required'},
-          ],
+        new FormGeneratorInput(
+          {
+            key: 'name',
+            type: 'text',
+            placeholder: 'name',
+            value: 'pepe2',
+            validators: [
+              { type: 'required' },
+            ],
 
-        }
+          },
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'email',
+            type: 'email',
+            placeholder: 'email',
+            value: 'pepe2@pepe.com',
+            validators: [
+              { type: 'required' },
+              { type: 'email' }
+            ],
+
+          },
+        ),
+        /*
+        {
+          key: 'provinces',
+          type: 'select',
+          placeholder: 'provincia',
+          value: this.provinces$,
+          validations: [
+            { type: 'required' },
+          ],
+        } */
       ]
     };
   }
