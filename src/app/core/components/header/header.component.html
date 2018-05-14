@@ -1,0 +1,14 @@
+<header class="page-header">
+  <div *ngIf="(user$ | async) as user">
+    <div *ngIf="user.isAuth; else loggedOut">
+      <p>{{user.username}}</p>
+      <img [src]="user.url"
+           alt="{{user.username}}" />
+      <a (click)="logout()">logout</a>
+    </div>
+    <ng-template #loggedOut>
+      <a routerLink="/login">Log In</a>
+    </ng-template>
+  </div>
+
+</header>

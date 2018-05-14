@@ -1,0 +1,7 @@
+<app-data-table *ngIf="customers$"
+                [dataSource$]="customers$"
+                [sortable]="true"
+                [config]="tableConfig"
+                [paginate]="true"
+                (action)="switchAction($event)">
+</app-data-table>

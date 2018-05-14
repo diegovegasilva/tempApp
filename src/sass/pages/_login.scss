@@ -1,0 +1,20 @@
+.loginPage {
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .login-form {
+      background: $white;
+      width: 350px;
+      header {
+        padding: 40px 20px;
+        background: $main-color;
+        text-align: center;
+      }
+      .form {
+        padding: 15px;
+      }
+    }
+  }
+}

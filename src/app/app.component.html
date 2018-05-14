@@ -1,0 +1,15 @@
+<section id="main-container">
+  <aside *ngIf="showMenu" class="menu-container">
+    <app-menu></app-menu>
+  </aside>
+  <div class="content-container">
+    <app-header *ngIf="showMenu"></app-header>
+    <div class="content">
+      <div class="card">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <app-alert></app-alert>
+</section>

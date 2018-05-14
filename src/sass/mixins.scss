@@ -1,0 +1,121 @@
+// MIXIN DE MEDIA QUERIES PARA MIN-WIDTH
+@mixin break-min($breakpoint) {
+
+  @if type-of($breakpoint) == string {
+      @if ($breakpoint == 'xs') {
+          @media only screen and (min-width: 0px) { @content; }
+      } @else if ($breakpoint == 'sm') {
+          @media only screen and (min-width: 768px) { @content; }
+      } @else if ($breakpoint == 'md') {
+          @media only screen and (min-width: 901px) { @content; }
+      } @else if ($breakpoint == 'lg') {
+          @media only screen and (min-width: 1024px) { @content; }
+      } @else if ($breakpoint == 'xl') {
+          @media only screen and (min-width: 1280px) { @content; }
+      } @else {
+          @error "Solamente se admiten las siguientes cadenas de valores: xs, sm, md, lg y xl";
+      }
+  } @else if type-of($breakpoint) == number {
+      @media only screen and (min-width: #{$breakpoint}px) { @content; }
+  }
+}
+
+// MIXIN DE MEDIA QUERIES PARA MAX-WIDTH
+@mixin break-max($breakpoint) {
+
+  @if type-of($breakpoint) == string {
+      @if ($breakpoint == '3xs') {
+          @media only screen and (max-width: 360px) { @content; }
+      } @else if ($breakpoint == '2xs') {
+          @media only screen and (max-width: 440px) { @content; }
+      } @else if ($breakpoint == 'xs') {
+          @media only screen and (max-width: 767px) { @content; }
+      } @else if ($breakpoint == 'sm') {
+          @media only screen and (max-width: 900px) { @content; }
+      } @else if ($breakpoint == 'md') {
+          @media only screen and (max-width: 1023px) { @content; }
+      } @else if ($breakpoint == 'lg') {
+          @media only screen and (max-width: 1279px) { @content; }
+      } @else {
+          @error "Solamente se admiten las siguientes cadenas de valores: xs, sm, md y lg";
+      }
+  } @else if type-of($breakpoint) == number {
+      @media only screen and (max-width: #{$breakpoint}px) { @content; }
+  }
+}
+
+// MIXIN DE MEDIA QUERIES PARA RANGOS DE MIN-WIDTH Y MAX-WIDTH
+@mixin break-only($breakpoints...) {
+
+  @if (length($breakpoints) == 2) { //Asegurarse de que se introducen dos parámetros de forma obligatoria
+
+      //Detectar orden de parámetros
+      $min-width: nth($breakpoints, 1);
+      $max-width: nth($breakpoints, 2);
+
+      //Parámetros permitidos
+      @if ($min-width == 'us>') { $min-width: 0px; }
+      @if ($min-width == 'xs>') { $min-width: 768px; }
+      @if ($min-width == 'sm>') { $min-width: 901px; }
+      @if ($min-width == 'md>') { $min-width: 1024px; }
+      @if ($min-width == 'lg>') { $min-width: 1280px; }
+      @if ($max-width == '<xs') { $max-width: 767px; }
+      @if ($max-width == '<sm') { $max-width: 900px; }
+      @if ($max-width == '<md') { $max-width: 1023px; }
+      @if ($max-width == '<lg') { $max-width: 1279px; }
+
+      @if ($min-width < $max-width) { //Comprobar sin el valor de min-width es menor que el max-width
+          @media only screen and (min-width: #{$min-width}) and (max-width: #{$max-width}){ @content; } //Media query
+      } @else  {
+          @error "El valor de min-width tiene que ser menor al de max-width";
+      }
+  } @else {
+      @error "Es obligatorio introducir exactamente dos parámetros (min-width y max-width) numéricos o de cadena de texto (dentro de los parámetros permitidos)";
+  }
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+      @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+      @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+      @content;
+  }
+  @keyframes #{$animation-name} {
+      @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  animation: #{$str};
+}
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+      @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+      @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+      @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+      @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+      @content;
+  }
+}

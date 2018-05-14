@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+body {
+  background: $secondary-color;
+}
+.container {
+  margin: 0 auto;
+}
+
+#main-container {
+  display: flex;
+  min-height: 100vh;
+  .menu-container {
+    background: $main-color;
+    width: 260px;
+  }
+  .content-container {
+    flex-grow: 2;
+    .content {
+      padding: 24px 32px;
+    }
+    .card {
+      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+        background: $white;
+    }
+  }
+}

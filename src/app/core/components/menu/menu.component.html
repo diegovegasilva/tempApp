@@ -1,0 +1,51 @@
+<nav id="main-menu">
+  <header>
+    <a routerLink="/home">
+      <img src="{{imgPath}}168x50">
+    </a>
+  </header>
+
+  <mat-accordion displayMode="flat">
+    <mat-expansion-panel routerLinkActive="active" expanded="{{homeAct.isActive}}" #homeAct="routerLinkActive" hideToggle="true">
+      <mat-expansion-panel-header expandedHeight="48px" routerLink="/home">
+
+        <i class="material-icons md-20">home</i>
+        <span>Home</span>
+
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel routerLinkActive="active" expanded="{{cstmrAct.isActive}}" #cstmrAct="routerLinkActive">
+      <mat-expansion-panel-header expandedHeight="48px">
+        <i class="material-icons md-20">people</i>
+        <span>Clientes</span>
+      </mat-expansion-panel-header>
+      <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/customers">Ver clientes</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/customers/add">Añadir cliente</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel routerLinkActive="active">
+      <mat-expansion-panel-header expandedHeight="48px">
+
+        <i class="material-icons md-20">people</i>
+        <span>Testing</span>
+
+      </mat-expansion-panel-header>
+      <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/customers">Ver clientes</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/customers/add">Añadir cliente</a>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</nav>

@@ -1,0 +1,54 @@
+html {
+  font-size: 62.5%;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+// icons
+
+.material-icons.md-12 {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.material-icons.md-16 {
+  font-size: 1.6rem;
+  line-height: 1.8;
+}
+.material-icons.md-18 {
+  font-size: 1.8rem;
+  line-height: 1.8;
+}
+.material-icons.md-20 {
+  font-size: 2rem;
+  line-height: 2;
+}
+.material-icons.md-24 {
+  font-size: 2.4rem;
+  line-height: 2.4;
+}
+.material-icons.md-36 {
+  font-size: 3.6rem;
+  line-height: 3.6;
+}
+.material-icons.md-48 {
+  font-size: 4.8rem;
+  line-height: 4.8;
+}
+
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}

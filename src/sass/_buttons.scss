@@ -1,0 +1,16 @@
+.mat-cell .list-button, .list-button {
+  min-width: 50px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  height: 34px;
+  line-height: 34px;
+  margin: 0 3px;
+  i{
+    position: relative;
+    margin-right: 3px;
+    & + span{
+      position: relative;
+      top:1px;
+    }
+  }
+}

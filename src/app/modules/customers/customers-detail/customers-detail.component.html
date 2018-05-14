@@ -1,0 +1,71 @@
+<div>
+
+  <form [formGroup]="customerForm" class="form">
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="name">
+        <mat-error *ngIf="customerForm.controls['name'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="customerForm.controls['email'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+        <mat-error *ngIf="customerForm.controls['email'].hasError('email') && !customerForm.controls['email'].hasError('required')">{{errorMsg.INVALID_EMAIL}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput type="tel" placeholder="Teléfono" formControlName="phone">
+        <mat-error *ngIf="customerForm.controls['phone'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Persona de contacto" formControlName="contact">
+        <mat-error *ngIf="customerForm.controls['contact'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Dirección" formControlName="address">
+        <mat-error *ngIf="customerForm.controls['address'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Ciudad" formControlName="city">
+        <mat-error *ngIf="customerForm.controls['city'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-select placeholder="Provincia" formControlName="province">
+          <mat-option *ngFor="let state of provinces$ | async" [value]="state.id">
+            {{state.province}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="customerForm.controls['province'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Cif" formControlName="cif">
+        <mat-error *ngIf="customerForm.controls['cif'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput placeholder="Código postal" formControlName="zip">
+        <mat-error *ngIf="customerForm.controls['zip'].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group btn-group align-right">
+      <button mat-raised-button *ngIf="!isUpdatePage" (click)="updateCustomer()" [disabled]="!formModified || customerForm.invalid"
+        color="primary">Guardar</button>
+      <button mat-raised-button *ngIf="!isUpdatePage" (click)="resetForm()" [disabled]="!formModified" type="button" color="accent">Deshacer</button>
+      <button mat-raised-button *ngIf="isUpdatePage" (click)="saveCustomer()" [disabled]="customerForm.invalid" color="primary">Guardar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,50 @@
+<mat-table [dataSource]="dataSource"
+           matSort
+           matSortDisabled="{{!sortable}}">
+
+    <ng-container *ngFor="let column of config.columns"
+                  matColumnDef="{{column.key}}">
+        <mat-header-cell *matHeaderCellDef
+                         mat-sort-header disabled="{{!column.sortable}}">
+            {{column.label}}
+        </mat-header-cell>
+
+        <!-- index type -->
+        <ng-container *ngIf="column.type =='index'">
+            <mat-cell *matCellDef="let i = index">
+                {{i+1}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- value type -->
+        <ng-container *ngIf="column.type =='value'">
+            <mat-cell *matCellDef="let element">
+                {{element[column.key]}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- action type -->
+        <ng-container *ngIf="column.type =='action'">
+            <mat-cell *matCellDef="let element">
+                <button *ngFor="let action of config.actions"
+                        mat-raised-button
+                        color="{{action.color}}"
+                        class="list-button"
+                        (click)="emitAction(action.type, element)">
+                    <i class="material-icons md-18" *ngIf="action.icon">{{action.icon}}</i>
+                    <span>{{action.label}}</span>
+                  </button>
+            </mat-cell>
+        </ng-container>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
+<mat-paginator *ngIf="paginate"
+               [length]="2"
+               [pageSize]="resultsPerPage"
+               [showFirstLastButtons]="true"
+               [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

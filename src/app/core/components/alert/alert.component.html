@@ -1,0 +1,11 @@
+<div class="alert-container" *ngIf="(alert$ | async) as alert" [@alertFadeInOut]>
+  <div class="alert-backdrop" (click)="closeAlert()"></div>
+  <div class="alert-wrapper">
+    <div class="alert-content" [ngClass]="alert.type">
+      <p>{{alert.message}}</p>
+      <a class="alert-close" (click)="closeAlert()">
+        <i class="material-icons md-18">clear</i>
+      </a>
+    </div>
+  </div>
+</div>
