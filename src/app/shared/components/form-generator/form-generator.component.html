@@ -2,12 +2,13 @@
       class="form">
     <div class="form-group"
          *ngFor="let field of fields">
+
         <mat-form-field *ngIf="field.inputType === 'text'">
             <input matInput
                    [type]="field.type"
+                   [placeholder]="field.placeholder"
                    [disabled]="field.disabled"
                    [readonly]="field.readonly"
-                   [placeholder]="field.placeholder"
                    formControlName="{{field.key}}">
             <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
             <mat-error *ngIf="form.controls[field.key].hasError('email') && !form.controls[field.key].hasError('required')">{{errorMsg.INVALID_EMAIL}}</mat-error>
@@ -18,10 +19,11 @@
 
         <mat-form-field *ngIf="field.inputType === 'select'">
             <mat-select [placeholder]="field.placeholder"
+                        [disabled]="field.disabled"
                         formControlName="{{field.key}}">
-                <mat-option *ngFor="let value of field.value | async"
-                            [value]="value.id">
-                    {{value.province}}
+                <mat-option *ngFor="let value of field.options | async"
+                            [value]="value[field.optionKeys.key]">
+                    {{value[field.optionKeys.value]}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
