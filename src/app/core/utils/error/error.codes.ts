@@ -20,3 +20,6 @@ export const PROVINCES_FECTH_ERROR = 'Error fetching provinces';
 
 export const REQUIRED_FIELD = 'Campo obligatorio';
 export const INVALID_EMAIL = 'Email incorrecto';
+export const INVALID_MINLENGTH = 'El campo es demasiado corto';
+export const INVALID_MAXLENGTH = 'El campo es demasiado largo';
+export const INVALID_PATTERN = 'Campo incorrecto';
