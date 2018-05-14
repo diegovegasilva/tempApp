@@ -20,6 +20,10 @@ import * as errorMsg from '../../../core/utils/error/error.codes';
 import { Customer } from '../../../shared/models/customer.model';
 import { Province } from '../../../shared/models/province.model';
 
+
+
+import { FormGeneratorData } from '../../../shared/models/formGenerator.model';
+
 @Component({
   selector: 'app-customers-detail',
   templateUrl: './customers-detail.component.html',
@@ -36,6 +40,8 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   customerId: number;
   errorMsg;
   isUpdatePage: boolean;
+
+  formSettings: FormGeneratorData;
 
   constructor(private store: Store<any>, private fb: FormBuilder) {
     this.createForm();
@@ -55,6 +61,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
       });
     this.provinces$ = this.store.select(getProvinces);
     this.errorMsg = errorMsg;
+    this.setupForm();
   }
 
   updateRouteConfig(customerId) {
@@ -112,5 +119,22 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
       this.customerSub.unsubscribe();
       this.formValues.unsubscribe();
     }
+  }
+
+  setupForm() {
+    this.formSettings = {
+      fields: [
+        {
+          key: 'name',
+          type: 'text',
+          placeholder: 'name',
+          value: 'pepe2',
+          validations: [
+            {type: 'required'},
+          ],
+
+        }
+      ]
+    };
   }
 }

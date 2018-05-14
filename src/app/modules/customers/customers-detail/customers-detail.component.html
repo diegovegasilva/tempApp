@@ -1,6 +1,6 @@
 <div>
 
-  <form [formGroup]="customerForm" class="form">
+<!--   <form [formGroup]="customerForm" class="form">
     <div class="form-group">
       <mat-form-field>
         <input matInput placeholder="Nombre" formControlName="name">
@@ -67,5 +67,11 @@
       <button mat-raised-button *ngIf="!isUpdatePage" (click)="resetForm()" [disabled]="!formModified" type="button" color="accent">Deshacer</button>
       <button mat-raised-button *ngIf="isUpdatePage" (click)="saveCustomer()" [disabled]="customerForm.invalid" color="primary">Guardar</button>
     </div>
-  </form>
+  </form> -->
+</div>
+
+<div>
+  <app-form-generator [settings]="formSettings">
+
+  </app-form-generator>
 </div>

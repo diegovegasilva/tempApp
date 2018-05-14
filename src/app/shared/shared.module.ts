@@ -18,6 +18,7 @@ import {
 import { MaterialPaginatorInt } from './classes/material-paginator-int';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { FormGeneratorComponent } from './components/form-generator/form-generator.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +26,11 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatSortModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    FormsModule, ReactiveFormsModule
   ],
   exports: [
     FormsModule,
@@ -37,9 +42,10 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatSortModule,
     MatPaginatorModule,
     DataTableComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    FormGeneratorComponent
   ],
-  declarations: [DataTableComponent, ConfirmDialogComponent],
+  declarations: [DataTableComponent, ConfirmDialogComponent, FormGeneratorComponent],
   entryComponents: [ConfirmDialogComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: MaterialPaginatorInt }]
 })
