@@ -13,7 +13,8 @@ import {
   MatPaginatorIntl,
   MatDialogModule,
   MatIconModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSlideToggleModule
 } from '@angular/material';
 
 import { MaterialPaginatorInt } from './classes/material-paginator-int';
@@ -32,7 +33,9 @@ import { FormGeneratorComponent } from './components/form-generator/form-generat
     MatSelectModule,
     MatButtonModule,
     MatCheckboxModule,
-    FormsModule, ReactiveFormsModule
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormsModule,

@@ -22,12 +22,7 @@ import { Province } from '../../../shared/models/province.model';
 
 
 
-import {
-  FormGeneratorData,
-  FormGeneratorInput,
-  FormGeneratorSelect,
-  FormGeneratorCheckbox
-} from '../../../shared/models/formGenerator.model';
+import * as FormGenerator from '../../../shared/models/formGenerator.model';
 
 @Component({
   selector: 'app-customers-detail',
@@ -41,7 +36,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   provinces$: Observable<Province[]>;
   customerId: number;
   isUpdatePage: boolean;
-  formSettings: FormGeneratorData;
+  formSettings: FormGenerator.FormGeneratorData;
 
   constructor(private store: Store<any>, private fb: FormBuilder) {
   }
@@ -105,7 +100,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   setupForm(values?: Customer) {
     this.formSettings = {
       fields: [
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'name',
             type: 'text',
@@ -116,7 +111,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'email',
             type: 'email',
@@ -128,7 +123,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'phone',
             type: 'tel',
@@ -139,7 +134,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'contact',
             type: 'text',
@@ -150,7 +145,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'address',
             type: 'text',
@@ -161,7 +156,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'city',
             type: 'text',
@@ -172,7 +167,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorSelect(
+        new FormGenerator.FormGeneratorSelect(
           {
             key: 'province',
             placeholder: 'Provincia',
@@ -184,7 +179,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'cif',
             type: 'text',
@@ -195,7 +190,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorInput(
+        new FormGenerator.FormGeneratorInput(
           {
             key: 'zip',
             type: 'text',
@@ -206,11 +201,21 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             ]
           }
         ),
-        new FormGeneratorCheckbox(
+        new FormGenerator.FormGeneratorCheckbox(
           {
             key: 'legal',
             type: 'checkbox',
             placeholder: 'legal',
+            value: !!'1',
+            validators: [
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGenerator.FormGeneratorSlideToggle(
+          {
+            key: 'light',
+            placeholder: 'light',
             value: !!'1',
             validators: [
               { type: 'required' }

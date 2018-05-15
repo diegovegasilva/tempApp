@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 
 
-export type InputType = 'text' | 'select' | 'radio' | 'checkbox' | 'textarea';
+export type InputType = 'text' | 'select' | 'radio' | 'checkbox' | 'textarea' | 'slideToggle';
 export type FieldType = 'text' | 'password' | 'tel' | 'email' | 'textarea'
     | 'radio' | 'checkbox' | 'select' | 'hidden' | 'range' | 'date' | 'number' | 'file' | 'color' | 'time';
 export type FieldValidation = 'required' | 'email' | 'pattern' | 'minLength' | 'maxLength';
@@ -101,6 +101,14 @@ export class FormGeneratorSelect extends FormGeneratorField<string> {
 
 export class FormGeneratorCheckbox extends FormGeneratorField<boolean> {
     inputType = 'checkbox';
+
+    constructor(options: FormGeneratorOptions<boolean> = {}) {
+        super(options);
+    }
+}
+
+export class FormGeneratorSlideToggle extends FormGeneratorField<boolean> {
+    inputType = 'slideToggle';
 
     constructor(options: FormGeneratorOptions<boolean> = {}) {
         super(options);
