@@ -87,6 +87,14 @@ export class FormGeneratorInput extends FormGeneratorField<string> {
     }
 }
 
+export class FormGeneratorTextarea extends FormGeneratorField<boolean> {
+    inputType = 'textarea';
+
+    constructor(options: FormGeneratorOptions<boolean> = {}) {
+        super(options);
+    }
+}
+
 export class FormGeneratorSelect extends FormGeneratorField<string> {
     inputType = 'select';
     options: Observable<any>;

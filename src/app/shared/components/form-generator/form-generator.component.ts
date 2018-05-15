@@ -37,6 +37,7 @@ export class FormGeneratorComponent implements OnInit, OnDestroy {
     this.formSub = this.form.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe(value => {
+        console.log(this.form);
         this.formChanges.emit(value);
         this.formModified = !_.isEqual(value, this.originalValues);
       });

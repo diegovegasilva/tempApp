@@ -27,11 +27,15 @@
             <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
         </mat-form-field>
 
-        <mat-checkbox *ngIf="field.inputType === 'checkbox'"
-                      formControlName="{{field.key}}">{{field.placeholder}}</mat-checkbox>
+        <ng-container *ngIf="field.inputType === 'checkbox'">
+            <mat-checkbox formControlName="{{field.key}}">{{field.placeholder}}</mat-checkbox>
+            <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+        </ng-container>
 
-        <mat-slide-toggle *ngIf="field.inputType === 'slideToggle'"
-                          formControlName="{{field.key}}">{{field.placeholder}}</mat-slide-toggle>
+        <ng-container *ngIf="field.inputType === 'slideToggle'">
+            <mat-slide-toggle formControlName="{{field.key}}">{{field.placeholder}}</mat-slide-toggle>
+            <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
+        </ng-container>
 
 
     </div>
