@@ -70,7 +70,7 @@
   </form> -->
 </div>
 
-<div *ngIf="provinces$">
+<div *ngIf="formSettings && provinces$">
     <app-form-generator [settings]="formSettings"
                         (saveForm)="saveForm($event)">
     </app-form-generator>

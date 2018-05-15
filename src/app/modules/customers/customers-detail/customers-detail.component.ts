@@ -34,11 +34,8 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   customerSub: Subscription;
   sub: Subscription;
   provinces$: Observable<Province[]>;
-  customerForm: FormGroup;
-  formModified = false;
   customerId: number;
   isUpdatePage: boolean;
-
   formSettings: FormGeneratorData;
 
   constructor(private store: Store<any>, private fb: FormBuilder) {
@@ -58,7 +55,6 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
           this.setupForm();
         }
       });
-    
   }
 
   getCustomerDetail(customerId) {
@@ -101,7 +97,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  setupForm(values?) {
+  setupForm(values?: Customer) {
     this.formSettings = {
       fields: [
         new FormGeneratorInput(
@@ -175,6 +171,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
           {
             key: 'province',
             placeholder: 'Provincia',
+            value: values ? values.province : '',
             options: this.provinces$,
             optionKeys: { key: 'id', value: 'province' },
             validators: [
