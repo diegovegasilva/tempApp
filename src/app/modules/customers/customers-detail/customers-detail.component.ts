@@ -33,38 +33,35 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
   customer: Customer;
   customerSub: Subscription;
   sub: Subscription;
-  formValues: Subscription;
   provinces$: Observable<Province[]>;
   customerForm: FormGroup;
   formModified = false;
   customerId: number;
-  errorMsg;
   isUpdatePage: boolean;
 
   formSettings: FormGeneratorData;
 
   constructor(private store: Store<any>, private fb: FormBuilder) {
-    this.createForm();
   }
 
   ngOnInit() {
+    this.provinces$ = this.store.select(getProvinces);
     this.sub = this.store
       .select(getRouter)
       .pipe(map(route => route.state), first())
       .subscribe(route => {
         if (route.params.id) {
-          this.isUpdatePage = false;
-          this.updateRouteConfig(route.params.id);
-        } else {
           this.isUpdatePage = true;
+          this.getCustomerDetail(route.params.id);
+        } else {
+          this.isUpdatePage = false;
+          this.setupForm();
         }
       });
-    this.provinces$ = this.store.select(getProvinces);
-    this.errorMsg = errorMsg;
-    this.setupForm();
+    
   }
 
-  updateRouteConfig(customerId) {
+  getCustomerDetail(customerId) {
     this.customerId = +customerId;
     this.store.dispatch(new customerActions.CustomerFetch(this.customerId));
     this.customerSub = this.store
@@ -72,99 +69,142 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
       .pipe(filter((customer: any) => customer))
       .subscribe(customer => {
         this.customer = customer;
-        this.customerForm.patchValue(this.customer);
-      });
-    this.formValues = this.customerForm.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(value => {
-        this.formModified = !_.isEqual(value, this.customer);
-        console.log(this.customerForm);
+        this.setupForm(this.customer);
       });
   }
 
-  createForm() {
-    this.customerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      contact: ['', Validators.required],
-      address: [, Validators.required],
-      city: ['', Validators.required],
-      province: ['', Validators.required],
-      cif: ['', Validators.required],
-      zip: ['', Validators.required],
-      id: ''
-    });
-  }
-
-  updateCustomer() {
-    this.store.dispatch(
-      new customerActions.CustomerUpdate(this.customerForm.value)
-    );
-  }
-
-  saveCustomer() {
-    this.store.dispatch(
-      new customerActions.CustomerAdd(this.customerForm.value)
-    );
-  }
-
-  resetForm() {
-    this.customerForm.patchValue(this.customer);
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-    if (!this.isUpdatePage) {
-      this.customerSub.unsubscribe();
-      this.formValues.unsubscribe();
+  saveForm(values) {
+    if (this.isUpdatePage) {
+      this.updateCustomer(values);
+    } else {
+      this.saveCustomer(values);
     }
   }
 
-  setupForm() {
+  updateCustomer(values) {
+    this.store.dispatch(
+      new customerActions.CustomerUpdate(values)
+    );
+  }
+
+  saveCustomer(values) {
+    this.store.dispatch(
+      new customerActions.CustomerAdd(values)
+    );
+  }
+
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+    if (this.isUpdatePage) {
+      this.customerSub.unsubscribe();
+    }
+  }
+
+  setupForm(values?) {
     this.formSettings = {
       fields: [
         new FormGeneratorInput(
           {
             key: 'name',
             type: 'text',
-            placeholder: 'name',
-            value: 'pepe2',
+            placeholder: 'Nombre',
+            value: values ? values.name : '',
             validators: [
               { type: 'required' },
-            ],
-
-          },
+            ]
+          }
         ),
         new FormGeneratorInput(
           {
             key: 'email',
             type: 'email',
-            placeholder: 'email',
-            value: 'pepe2@pepe.com',
+            placeholder: 'Email',
+            value: values ? values.email : '',
             validators: [
               { type: 'required' },
               { type: 'email' }
-            ],
-
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'phone',
+            type: 'tel',
+            placeholder: 'Teléfono',
+            value: values ? values.phone : '',
+            validators: [
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'contact',
+            type: 'text',
+            placeholder: 'Persona de contacto',
+            value: values ? values.contact : '',
+            validators: [
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'address',
+            type: 'text',
+            placeholder: 'Dirección',
+            value: values ? values.address : '',
+            validators: [
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'city',
+            type: 'text',
+            placeholder: 'Ciudad',
+            value: values ? values.city : '',
+            validators: [
+              { type: 'required' }
+            ]
           }
         ),
         new FormGeneratorSelect(
           {
-            key: 'provinces',
-            placeholder: 'provincias',
+            key: 'province',
+            placeholder: 'Provincia',
             options: this.provinces$,
             optionKeys: { key: 'id', value: 'province' },
             validators: [
-              { type: 'required' },
-            ],
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'cif',
+            type: 'text',
+            placeholder: 'CIF',
+            value: values ? values.cif : '',
+            validators: [
+              { type: 'required' }
+            ]
+          }
+        ),
+        new FormGeneratorInput(
+          {
+            key: 'zip',
+            type: 'text',
+            placeholder: 'Código Postal',
+            value: values ? values.zip : '',
+            validators: [
+              { type: 'required' }
+            ]
           }
         )
       ]
     };
-  }
-
-  logChanges(event){
-    console.log('event', event);
   }
 }

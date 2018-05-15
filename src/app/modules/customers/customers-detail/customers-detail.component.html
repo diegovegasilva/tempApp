@@ -1,6 +1,6 @@
 <div>
 
-<!--   <form [formGroup]="customerForm" class="form">
+    <!--   <form [formGroup]="customerForm" class="form">
     <div class="form-group">
       <mat-form-field>
         <input matInput placeholder="Nombre" formControlName="name">
@@ -70,8 +70,8 @@
   </form> -->
 </div>
 
-<div>
-  <app-form-generator [settings]="formSettings" (formChanges)="logChanges($event)" (saveForm)="logChanges($event)">
-
-  </app-form-generator>
+<div *ngIf="provinces$">
+    <app-form-generator [settings]="formSettings"
+                        (saveForm)="saveForm($event)">
+    </app-form-generator>
 </div>

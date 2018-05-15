@@ -79,6 +79,7 @@ export class FormGeneratorComponent implements OnInit, OnDestroy {
 
   reset() {
     this.form.reset();
+    this.form.patchValue(this.originalValues);
   }
 
   ngOnDestroy() {
