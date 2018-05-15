@@ -1,5 +1,6 @@
 <div *ngIf="formSettings && provinces$">
     <app-form-generator [settings]="formSettings"
+                        (formChanges)="test($event)"
                         (saveForm)="saveForm($event)">
     </app-form-generator>
 </div>

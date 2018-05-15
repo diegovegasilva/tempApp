@@ -99,3 +99,11 @@ export class FormGeneratorSelect extends FormGeneratorField<string> {
     }
 }
 
+export class FormGeneratorCheckbox extends FormGeneratorField<boolean> {
+    inputType = 'checkbox';
+
+    constructor(options: FormGeneratorOptions<boolean> = {}) {
+        super(options);
+    }
+}
+

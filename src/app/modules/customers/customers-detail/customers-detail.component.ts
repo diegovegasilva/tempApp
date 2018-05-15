@@ -22,7 +22,12 @@ import { Province } from '../../../shared/models/province.model';
 
 
 
-import { FormGeneratorData, FormGeneratorInput, FormGeneratorSelect } from '../../../shared/models/formGenerator.model';
+import {
+  FormGeneratorData,
+  FormGeneratorInput,
+  FormGeneratorSelect,
+  FormGeneratorCheckbox
+} from '../../../shared/models/formGenerator.model';
 
 @Component({
   selector: 'app-customers-detail',
@@ -176,8 +181,7 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             optionKeys: { key: 'id', value: 'province' },
             validators: [
               { type: 'required' }
-            ],
-
+            ]
           }
         ),
         new FormGeneratorInput(
@@ -201,8 +205,23 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
               { type: 'required' }
             ]
           }
+        ),
+        new FormGeneratorCheckbox(
+          {
+            key: 'legal',
+            type: 'checkbox',
+            placeholder: 'legal',
+            value: !!'1',
+            validators: [
+              { type: 'required' }
+            ]
+          }
         )
       ]
     };
+  }
+
+  test(e) {
+    console.log(e);
   }
 }
