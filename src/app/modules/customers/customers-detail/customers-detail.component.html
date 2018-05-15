@@ -71,7 +71,7 @@
 </div>
 
 <div>
-  <app-form-generator [settings]="formSettings">
+  <app-form-generator [settings]="formSettings" (formChanges)="logChanges($event)" (saveForm)="logChanges($event)">
 
   </app-form-generator>
 </div>

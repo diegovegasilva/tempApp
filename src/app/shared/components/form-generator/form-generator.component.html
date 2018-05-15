@@ -29,6 +29,16 @@
             <mat-error *ngIf="form.controls[field.key].hasError('required')">{{errorMsg.REQUIRED_FIELD}}</mat-error>
         </mat-form-field>
     </div>
-</form>
 
-<button (click)="test()">test</button>
+    <div class="form-group btn-group align-right">
+        <button mat-raised-button
+                (click)="save()"
+                [disabled]="!formModified || form.invalid"
+                color="primary">Guardar</button>
+        <button mat-raised-button
+                (click)="reset()"
+                [disabled]="!formModified"
+                type="button"
+                color="accent">Deshacer</button>
+    </div>
+</form>

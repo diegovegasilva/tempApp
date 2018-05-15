@@ -163,4 +163,8 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
       ]
     };
   }
+
+  logChanges(event){
+    console.log('event', event);
+  }
 }
