@@ -25,7 +25,7 @@ export class FormGeneratorComponent implements OnInit, OnDestroy {
   errorMsg;
   originalValues = {};
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.fields = this.settings.fields;
@@ -57,7 +57,8 @@ export class FormGeneratorComponent implements OnInit, OnDestroy {
   createFormObject() {
     const formObject = {};
     _.each(this.fields, field => {
-      formObject[field.key] = new FormControl(field.value || '', this.addValidators(field.validators));
+      formObject[field.key] = new FormControl(
+        { value: field.value || '', disabled: field.disabled }, this.addValidators(field.validators));
     });
 
     return formObject;

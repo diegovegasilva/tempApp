@@ -176,7 +176,8 @@ export class CustomersDetailComponent implements OnInit, OnDestroy {
             optionKeys: { key: 'id', value: 'province' },
             validators: [
               { type: 'required' }
-            ]
+            ],
+
           }
         ),
         new FormGeneratorInput(
